@@ -1,155 +1,138 @@
-\documentclass[11pt]{article}
+% !TeX program = xelatex
+% 适配 zju-resume-template 仓库的 XeLaTeX 简历源文件
+% 使用方法：将本文件替换仓库根目录下的 CV.tex，然后由 GitHub Actions 自动编译。
+% 请将下方方括号中的个人信息替换为真实信息；不要保留未填写的占位符。
 
+\documentclass[11pt,a4paper]{article}
 
-\setlength{\parindent}{0pt}
+% -------------------- 基础设置 --------------------
+\usepackage{fontspec}
+\usepackage{xeCJK}
 \usepackage{xltxtra}
 \usepackage{hyperref}
 \hypersetup{hidelinks}
 \usepackage{url}
 \urlstyle{tt}
 \usepackage{xcolor}
-\definecolor{CVBlue}{RGB}{23,110,191}
 \usepackage{calc}
 \usepackage{graphicx}
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usepackage{fontspec}
-\usepackage{xeCJK}
 \usepackage{enumitem}
-\CJKsetecglue{} %% 取消中文与数字之间的间隙
+\usepackage{titlesec}
+\usepackage{fontawesome}
+\usepackage{microtype}
 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\CJKsetecglue{}
+\linespread{1.13}
 
-%% 主文档字体设置
+% 模板仓库内置字体。注意中文字体文件实际扩展名为 .ttf。
 \setmainfont[
     Path = fonts/Main/,
-    Extension = .otf,
-    BoldFont = texgyretermes-bold.otf, % 加粗字体
-]{texgyretermes-regular.otf} % 正文字体
+    BoldFont = texgyretermes-bold.otf
+]{texgyretermes-regular.otf}
 
-% 中文字体设置
 \setCJKmainfont[
     Path = fonts/hansans/,
-    Extension = .ttf,
-    BoldFont = NotoSansSC-Bold.ttf, % 加粗字体
-]{NotoSansSC-Regular.otf} % 正文字体
+    BoldFont = NotoSansSC-Bold.ttf
+]{NotoSansSC-Regular.ttf}
 
-
-\usepackage{relsize}
-\usepackage{xspace}
-
-% 使用 fontawesome（部分图标）
-\usepackage{fontawesome} 
-
-% A4纸，上下左右边距
+% -------------------- 页面与视觉样式 --------------------
+\definecolor{CVBlue}{RGB}{23,110,191}
 \usepackage[
     a4paper,
-    left=1.2cm,
-    right=1.2cm,
-    top=1.5cm,
-    bottom=1cm,
+    left=1.35cm,
+    right=1.35cm,
+    top=1.15cm,
+    bottom=1.15cm,
     nohead
 ]{geometry}
 
-\renewcommand{\baselinestretch}{1.5} % 行间距设为1.5
+\setlist[itemize]{
+    leftmargin=1.45em,
+    itemsep=0.12em,
+    topsep=0.18em,
+    parsep=0pt,
+    partopsep=0pt
+}
 
-\usepackage{titlesec}
-\usepackage{enumitem}
-\setlist{noitemsep} % 取消列表项间的额外间距
-%\setlist{nosep} % 取消所有垂直间距
-\setlist[itemize]{topsep=0.25em, leftmargin=*}
-\setlist[enumerate]{topsep=0.25em, leftmargin=*}
+\titleformat{\section}
+  {\large\bfseries\raggedright}
+  {}{0em}{}
+  [{\color{CVBlue}\titlerule}]
+\titlespacing*{\section}{0pt}{0.85em}{0.45em}
 
-% --- 用于控制【不同项目之间】的垂直距离 ---
-\newlength{\interProjectSpacing}
-\setlength{\interProjectSpacing}{0.9em} % <--- 在此调整项目之间的距离
-\newcommand{\projectsep}{\vspace{\interProjectSpacing}}
-
-% --- 用于控制【项目标题】与下方【项目描述】的距离 ---
-\newlength{\intraProjectTitleSep}
-\setlength{\intraProjectTitleSep}{0.4em} % <--- 在此调整标题和描述的距离
-\newcommand{\titlebreak}{\\[\intraProjectTitleSep]}
-
-% --- 用于控制【项目描述】与下方【要点列表】的距离 ---
-\newlength{\intraProjectListTopSep}
-\setlength{\intraProjectListTopSep}{0.2em} % <--- 在此调整描述和列表的距离
-
-% =======================================================================
-
-
-\titleformat{\section}         % 定制 \section 命令 
-{\large\bfseries\raggedright} % 将 section 标题设置为大号、粗体且左对齐
-{}{0em}                      % 可用于为所有 section 添加前缀（如“章节...”）
-{}                           % 可用于在标题前插入代码
-[{\color{CVBlue}\titlerule}]  % 在标题后插入一条横线
-\titlespacing*{\section}{0cm}{*1.6}{*1.2}
-
-
+\newlength{\projectSpacing}
+\setlength{\projectSpacing}{0.48em}
+\newcommand{\projectsep}{\vspace{\projectSpacing}}
+\newcommand{\projecttitle}[2]{%
+  \textbf{#1}\hfill{\small\color{black!65}#2}\par\vspace{0.12em}%
+}
+\newcommand{\cvsection}[2]{%
+  \section{\texorpdfstring{\makebox[\widthof{#1}][c]{\color{CVBlue}#1}\hspace{0.35em}#2}{#2}}%
+}
 
 \begin{document}
 \pagenumbering{gobble}
 
-%%%% 利用tikz来定位照片
-\begin{tikzpicture}[remember picture, overlay] 
-    \node[anchor = north east] at ($(current page.north east)+(-2cm,-1.2cm)$) {\includegraphics[height=3cm]{avatar.jpg}};
-  \end{tikzpicture}%
-  %%%% 利用tikz来定位学校Logo，这里只在第一页显示
-  \begin{tikzpicture}[remember picture, overlay] 
-    \node[anchor = north west] at ($(current page.north west)+(0.5cm,+1.0cm)$) {\includegraphics[height=6cm]{zju.png}};
-  \end{tikzpicture}%
-\centerline{\LARGE\bfseries{胡豆}} 
+% -------------------- 个人信息 --------------------
+\begin{center}
+    {\LARGE\bfseries [姓名]}\\[0.28em]
+    {\small
+      \faPhone\ [联系电话]
+      \quad
+      \faEnvelopeO\ \href{mailto:your.email@example.com}{your.email@example.com}
+      \quad
+      \faGithubSquare\ \href{https://github.com/lilinlilin909-ux}{github.com/lilinlilin909-ux}
+    }\\[0.28em]
+    {\normalsize\bfseries 求职意向：人形机器人运动控制算法实习生}
+\end{center}
 
-\centerline{\normalsize{\faPhone\ 111-1111-1111 \quad \faEnvelopeO\ \href{mailto:3230100000@zju.edu.cn}{3230100000@zju.edu.cn}}} 
+% -------------------- 教育背景 --------------------
+\cvsection{\faGraduationCap}{教育背景}
+\textbf{[硕士就读院校]}\hfill [入学年月] -- 至今\\[-0.05em]
+硕士研究生\quad 车辆工程\\[-0.05em]
+研究方向：无人电动摩托车智能驾驶
 
-\centerline{\normalsize{\faGithubSquare\ \href{https://github.com/maksymilan}{https://github.com/maksymilan} \quad \faRssSquare\ \href{https://maksymilan.github.io/}{https://maksymilan.github.io}}} 
-    
-\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\ 教育背景}    
-\textbf{浙江大学} \hfill 2023.9 -- 至今\\[0.5em] % 标题和正文间加一点距离
-CC98烂坑挖掘工程与技术\quad 大二 
-\begin{itemize}[nosep]
-    \item 相关课程：《烂坑挖掘及基础》、《高级挖坑技巧》、《烂坑数理统计》
-\end{itemize}
+% -------------------- 个人简介 --------------------
+\cvsection{\faInfo}{个人简介}
+车辆工程专业硕士研究生，研究方向为无人电动摩托车智能驾驶。具备复杂机械系统非线性多刚体动力学建模、现代控制理论及电机控制仿真研究经历。能够从物理原理出发开展动力学方程推导、状态空间建模、控制器数学设计与稳定性分析。独立完成 Whipple 自行车四刚体动力学模型推导，并通过 Meijaard、Basu 相关 Benchmark 验证；另有 PMSM 双闭环 FOC/滑模观测器仿真建模及 Linux/C++ 电机 CAN 通信项目实践。希望将已有动力学与控制研究能力迁移至机器人运动控制领域。
 
-\section{\makebox[\widthof{\faUsers}][c]{\color{CVBlue}\faUsers}\ 项目经历}
+% -------------------- 科研与项目经历 --------------------
+\cvsection{\faUsers}{科研与项目经历}
 
-% --- 第一个项目 ---
-% 将标题行末尾的 \\ 替换为 \titlebreak 命令
-\textbf{98烂坑风控与可视化作战平台} \hfill 2024.08 -- 至今 \titlebreak
-项目描述：为维护cc98社区的讨论纯度、净化“心灵之约”版块风气，本项目旨在对“烂坑”进行科学、严谨的量化分析，并引入\textbf{大语言模型(LLM)}对烂坑帖进行\textbf{自动化情感极性与“离谱指数”标注}。
-% 在 itemize 的选项中，使用 topsep=\intraProjectListTopSep 来控制上边距
-\begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{数据与后端}：运用 \textbf{Go} 语言及 \textbf{GORM} 框架，实现对全站“烂坑”帖的7x24小时全天候\textbf{抓取}与\textbf{入库}(MySQL)。
-    \item \textbf{可视化前端}：采用原生 \textbf{HTML/CSS/JS} 构建了“烂坑”实时监控\textbf{作战大屏}。实现了坑主成分分析、挖坑热力图、年度烂坑王榜单等\textbf{可视化图表}，并通过 \textbf{AJAX} 异步刷新，确保数据洞察的实时性。
-    \item \textbf{核心产出}：全面掌握了从\textbf{数据采集、清洗、LLM标注到可视化分析}的“反烂坑”全链路技术。
-\end{itemize}
-
-% 使用 \projectsep 命令来分隔两个项目
-\projectsep
-
-% --- 第二个项目 ---
-\textbf{AIGC驱动的超进化自动挖坑机 (Agent)} \hfill 2025.02 -- 至今 \titlebreak
-项目描述：为探索心灵版规的边界，以及测试版主锁沉反应速度的极限，本项目基于\textbf{多智能体协作(MCP)与LLM}技术，开发了一款能\textbf{自主“挖坑”与“互坑”}的AI Agent。
-\begin{itemize}[nosep, topsep=\intraProjectListTopSep]
-    \item \textbf{并发与调度}：后端采用 \textbf{Go} 语言，充分利用 \textbf{Goroutine} 和 \textbf{Channel} 的高并发模型，模拟\textbf{用户并发在线}，执行定时挖坑，确保挖坑行动的\textbf{隐蔽性}与\textbf{高效性}。
-    \item \textbf{实时监控与响应}：运用 \textbf{WebSocket} 协议实现了对目标帖子的\textbf{实时监听与交互}。确保在烂坑被识破的第一时间，Agent能光速完成\textbf{“lktp”}或\textbf{反向钓鱼}操作，展现出极高的AI博弈能力。
-    \item \textbf{可视化GUI}：前端使用 \textbf{React} 框架构建了\textbf{后台管理的可视化面板 (Admin Panel)}。可一键下达挖坑指令、动态调整Agent的\textbf{指令}、并实时监控数据。
-\end{itemize}
-
-\section{\makebox[\widthof{\faCogs}][c]{\color{CVBlue}\faCogs}\ 技术栈}
-\begin{itemize}[nosep]
-    \item \textbf{编程语言：} \textbf{Go}, Python, C++
-    \item \textbf{开发工具：} SSH, Git, Vim, MakeFile,LaTex
-    \item \textbf{操作系统：} Linux
-\end{itemize}
-\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faList}\ 获奖情况}
+\projecttitle{Whipple 自行车非线性多刚体动力学建模与平衡控制}{[起止时间]}
 \begin{itemize}
-    \item CC98年度用户 \hfill 2023.12
-    
+    \item 基于物理原理建立 Whipple 自行车四刚体动力学模型，采用牛顿—欧拉方法推导刚体动力学方程及运动约束关系，完成动力学公式的显式展开。
+    \item 参考 Meijaard、Basu 相关经典研究中的建模方法与推导技巧，完成模型对照验证，并通过 Meijaard 与 Basu 相关的全部 Benchmark。
+    \item 基于动力学模型建立状态空间表达，独立开展控制器数学设计、稳定性分析与参数设计，实现自行车转向跟踪及原地平衡仿真。
+    \item 模型范围采用经典 Whipple 刚体拓扑，未纳入悬架、制动及轮胎变形等扩展因素。
 \end{itemize}
-    
-\section{\makebox[\widthof{\faInfo}][c]{\color{CVBlue}\faInfo}\ 其他}
-\begin{itemize}[parsep=0.5ex]
-    \item \textbf{技术博客：} \href{https://maksymilan.github.io/}{https://maksymilan.github.io/}
-    \item \textbf{GitHub：} \href{https://github.com/maksymilan}{https://github.com/maksymilan} 
-    \item \textbf{英语水平：} CET-4, CET-6
+
+\projectsep
+\projecttitle{PMSM 双闭环 FOC 与滑模观测器仿真建模}{[起止时间]}
+\begin{itemize}
+    \item 基于 MATLAB/Simulink 搭建永磁同步电机（PMSM）双闭环磁场定向控制（FOC）仿真模型，建立电流环与速度环控制结构。
+    \item 搭建滑模观测器（SMO）仿真模型，开展电机状态观测相关方法的建模与分析。
+    \item 了解基于 TI 电机控制平台的双环参数整定方法；相关经历以 MATLAB/Simulink 仿真建模为主。
 \end{itemize}
+
+\projectsep
+\projecttitle{RS10P 电机私有 CAN 通信软件开发}{[起止时间]}
+\begin{itemize}
+    \item 基于 Linux/Ubuntu、C++ 与 SocketCAN，开展 RS10P 电机厂商私有 CAN 2.0 扩展帧协议通信程序开发。
+    \item 根据厂商协议手册开展通信帧收发、协议数据解析及控制指令交互等功能实现与调试。
+    \item 使用 AI 辅助代码实现、中文注释生成、代码阅读与调试；本人负责协议理解、控制逻辑设计及测试结果分析。
+\end{itemize}
+
+% -------------------- 专业技能 --------------------
+\cvsection{\faCogs}{专业技能}
+\begin{itemize}
+    \item \textbf{动力学与运动学：} 牛顿—欧拉法、多刚体动力学建模、刚体运动学、运动约束分析；具备李群与李代数相关理论基础。
+    \item \textbf{控制理论：} 经典与现代控制理论；LQR、MPC、$H_\infty$、$H_2$ 控制理论基础；控制器设计、稳定性分析与参数整定。
+    \item \textbf{系统辨识：} ARX、ARMAX、状态空间（SS）辨识及 PRBS 激励方法。
+    \item \textbf{电机控制：} PMSM 数学建模、FOC 双闭环控制、滑模观测器（SMO）及 TI 平台双环参数整定方法。
+    \item \textbf{开发与仿真：} MATLAB/Simulink；Linux/Ubuntu；C++、SocketCAN 电机通信项目实践；AI 辅助代码实现与调试。
+\end{itemize}
+
 \end{document}
