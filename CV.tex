@@ -1,11 +1,9 @@
 % !TeX program = xelatex
-% 适配 zju-resume-template 仓库的 XeLaTeX 简历源文件
-% 使用方法：将本文件替换仓库根目录下的 CV.tex，然后由 GitHub Actions 自动编译。
-% 请将下方方括号中的个人信息替换为真实信息；不要保留未填写的占位符。
+% zju-resume-template / CV.tex
+% Keep the repository's fonts/ and fontawesome*.tex files.
+% Fill in personal information, education and personal profile.
 
 \documentclass[11pt,a4paper]{article}
-
-% -------------------- 基础设置 --------------------
 \usepackage{fontspec}
 \usepackage{xeCJK}
 \usepackage{xltxtra}
@@ -24,115 +22,91 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \CJKsetecglue{}
-\linespread{1.13}
+\linespread{1.07}
 
-% 模板仓库内置字体。注意中文字体文件实际扩展名为 .ttf。
-\setmainfont[
-    Path = fonts/Main/,
-    BoldFont = texgyretermes-bold.otf
-]{texgyretermes-regular.otf}
+\setmainfont[Path=fonts/Main/,BoldFont=texgyretermes-bold.otf]{texgyretermes-regular.otf}
+\setCJKmainfont[Path=fonts/hansans/,BoldFont=NotoSansSC-Bold.ttf]{NotoSansSC-Regular.ttf}
 
-\setCJKmainfont[
-    Path = fonts/hansans/,
-    BoldFont = NotoSansSC-Bold.ttf
-]{NotoSansSC-Regular.ttf}
-
-% -------------------- 页面与视觉样式 --------------------
 \definecolor{CVBlue}{RGB}{23,110,191}
-\usepackage[
-    a4paper,
-    left=1.35cm,
-    right=1.35cm,
-    top=1.15cm,
-    bottom=1.15cm,
-    nohead
-]{geometry}
+\usepackage[a4paper,left=1.28cm,right=1.28cm,top=1.05cm,bottom=1.05cm,nohead]{geometry}
 
-\setlist[itemize]{
-    leftmargin=1.45em,
-    itemsep=0.12em,
-    topsep=0.18em,
-    parsep=0pt,
-    partopsep=0pt
-}
+\titleformat{\section}{\large\bfseries\raggedright}{}{0em}{}[{\color{CVBlue}\titlerule}]
+\titlespacing*{\section}{0pt}{0.62em}{0.30em}
 
-\titleformat{\section}
-  {\large\bfseries\raggedright}
-  {}{0em}{}
-  [{\color{CVBlue}\titlerule}]
-\titlespacing*{\section}{0pt}{0.85em}{0.45em}
-
-\newlength{\projectSpacing}
-\setlength{\projectSpacing}{0.48em}
-\newcommand{\projectsep}{\vspace{\projectSpacing}}
-\newcommand{\projecttitle}[2]{%
-  \textbf{#1}\hfill{\small\color{black!65}#2}\par\vspace{0.12em}%
-}
 \newcommand{\cvsection}[2]{%
   \section{\texorpdfstring{\makebox[\widthof{#1}][c]{\color{CVBlue}#1}\hspace{0.35em}#2}{#2}}%
+}
+\newcommand{\projecttitle}[2]{%
+  \textbf{#1}\hfill{\small\color{black!65}#2}\par\vspace{0.16em}%
+}
+\newcommand{\resumepara}[2]{%
+  \noindent\textbf{#1：}#2\par\vspace{0.26em}%
 }
 
 \begin{document}
 \pagenumbering{gobble}
+\small
 
-% -------------------- 个人信息 --------------------
 \begin{center}
-    {\LARGE\bfseries [姓名]}\\[0.28em]
+    {\LARGE\bfseries [郁博威]}\\[0.22em]
     {\small
-      \faPhone\ [联系电话]
+      \faPhone\ [19816352936]
       \quad
-      \faEnvelopeO\ \href{mailto:your.email@example.com}{your.email@example.com}
+      \faEnvelopeO\ \href{mailto:your.email@example.com}{[2350483780@qq.com]}
       \quad
       \faGithubSquare\ \href{https://github.com/lilinlilin909-ux}{github.com/lilinlilin909-ux}
-    }\\[0.28em]
+    }\\[0.20em]
     {\normalsize\bfseries 求职意向：人形机器人运动控制算法实习生}
 \end{center}
 
-% -------------------- 教育背景 --------------------
-\cvsection{\faGraduationCap}{教育背景}
-\textbf{[硕士就读院校]}\hfill [入学年月] -- 至今\\[-0.05em]
+\cvsection{\faGraduationCap}{硕士}
+\textbf{[武汉理工大学]}\hfill [2025.9] -- 至今\\[-0.05em]
 硕士研究生\quad 车辆工程\\[-0.05em]
-研究方向：无人电动摩托车智能驾驶
+研究方向：[电动摩托车的智能驾驶]
 
-% -------------------- 个人简介 --------------------
-\cvsection{\faInfo}{个人简介}
-车辆工程专业硕士研究生，研究方向为无人电动摩托车智能驾驶。具备复杂机械系统非线性多刚体动力学建模、现代控制理论及电机控制仿真研究经历。能够从物理原理出发开展动力学方程推导、状态空间建模、控制器数学设计与稳定性分析。独立完成 Whipple 自行车四刚体动力学模型推导，并通过 Meijaard、Basu 相关 Benchmark 验证；另有 PMSM 双闭环 FOC/滑模观测器仿真建模及 Linux/C++ 电机 CAN 通信项目实践。希望将已有动力学与控制研究能力迁移至机器人运动控制领域。
-
-% -------------------- 科研与项目经历 --------------------
 \cvsection{\faUsers}{科研与项目经历}
+\projecttitle{无人电动摩托车非线性动力学建模与运动控制研究}
 
-\projecttitle{Whipple 自行车非线性多刚体动力学建模与平衡控制}{[起止时间]}
-\begin{itemize}
-    \item 基于物理原理建立 Whipple 自行车四刚体动力学模型，采用牛顿—欧拉方法推导刚体动力学方程及运动约束关系，完成动力学公式的显式展开。
-    \item 参考 Meijaard、Basu 相关经典研究中的建模方法与推导技巧，完成模型对照验证，并通过 Meijaard 与 Basu 相关的全部 Benchmark。
-    \item 基于动力学模型建立状态空间表达，独立开展控制器数学设计、稳定性分析与参数设计，实现自行车转向跟踪及原地平衡仿真。
-    \item 模型范围采用经典 Whipple 刚体拓扑，未纳入悬架、制动及轮胎变形等扩展因素。
-\end{itemize}
+\resumepara{非线性动力学建模与 Benchmark 验证}{
+基于 Whipple 四刚体模型，采用 Newton--Euler 方法建立车架及前后车轮的平动、转动方程，结合刚体运动学、轮地接触与无侧滑约束推导非线性 DAE 模型（8 个广义状态变量、10 个代数未知量）。Meijaard 线性 Benchmark 覆盖 1--10 m/s 共 10 个速度工况，40 个特征根最大绝对误差为 $3.517\times10^{-13}\ \mathrm{s}^{-1}$；Basu--Mandal 非线性 Benchmark 完成 7 组稳态圆周解及 28 个非平凡特征根对照，转向角最大误差 $2.407\times10^{-9}$°、特征根最大误差 $6.713\times10^{-10}\ \mathrm{s}^{-1}$，最大归一化约束残差 $1.975\times10^{-14}$。
+}
 
-\projectsep
-\projecttitle{PMSM 双闭环 FOC 与滑模观测器仿真建模}{[起止时间]}
-\begin{itemize}
-    \item 基于 MATLAB/Simulink 搭建永磁同步电机（PMSM）双闭环磁场定向控制（FOC）仿真模型，建立电流环与速度环控制结构。
-    \item 搭建滑模观测器（SMO）仿真模型，开展电机状态观测相关方法的建模与分析。
-    \item 了解基于 TI 电机控制平台的双环参数整定方法；相关经历以 MATLAB/Simulink 仿真建模为主。
-\end{itemize}
+\resumepara{数值计算高性能优化}{
+采用 C++ 固定尺寸 MEX 内核，结合公共子表达式消除（CSE）、反向自动微分（Reverse AD）、解析 Jacobian、约束方程块消元、RK4 灵敏度传播及中间量复用优化计算。统一 测试基准下，本模型 RHS、RK4、离散 Jacobian 平均计算时间分别为 10.52、19.41、73.99 μs；相较 Moore/PyDy Kane、Wang (2015)、Basu–Mandal、Xiong–Wang–Liu (2020) 模型，三项计算分别提速 1.14/1.22/3.31、2.27/2.76/3.43、3.18/5.14/4.10、1.20/1.36/2.07 倍。进一步采用紧凑工作区及六线程跨区间并行，45 个预测区间批量计算的等效Jacobian耗时由 67.99 降至 13.30 μs，吞吐提升 5.11 倍，为 NMPC 预测域内高频 Jacobian 计算提供性能基础。
 
-\projectsep
-\projecttitle{RS10P 电机私有 CAN 通信软件开发}{[起止时间]}
-\begin{itemize}
-    \item 基于 Linux/Ubuntu、C++ 与 SocketCAN，开展 RS10P 电机厂商私有 CAN 2.0 扩展帧协议通信程序开发。
-    \item 根据厂商协议手册开展通信帧收发、协议数据解析及控制指令交互等功能实现与调试。
-    \item 使用 AI 辅助代码实现、中文注释生成、代码阅读与调试；本人负责协议理解、控制逻辑设计及测试结果分析。
-\end{itemize}
+\resumepara{LQR 转向跟踪与圆周轨迹控制}{
+在直立直线工作点对 Newton--Euler 模型进行一阶线性化，基于代数 Riccati 方程（ARE）设计 LQR 状态反馈控制器，实现转向角跟踪（转向跟踪误差：[待补充]）。在 MATLAB--BikeSim 联合仿真中完成 5--60 km/h、12 个速度节点的左右转圆周轨迹测试；最低实测质心速度为 4.983 km/h，最小已认证回转半径为 4.667 m，轨迹拟合径向 RMS 小于目标半径的 0.5\%。
+}
 
-% -------------------- 专业技能 --------------------
-\cvsection{\faCogs}{专业技能}
-\begin{itemize}
-    \item \textbf{动力学与运动学：} 牛顿—欧拉法、多刚体动力学建模、刚体运动学、运动约束分析；具备李群与李代数相关理论基础。
-    \item \textbf{控制理论：} 经典与现代控制理论；LQR、MPC、$H_\infty$、$H_2$ 控制理论基础；控制器设计、稳定性分析与参数整定。
-    \item \textbf{系统辨识：} ARX、ARMAX、状态空间（SS）辨识及 PRBS 激励方法。
-    \item \textbf{电机控制：} PMSM 数学建模、FOC 双闭环控制、滑模观测器（SMO）及 TI 平台双环参数整定方法。
-    \item \textbf{开发与仿真：} MATLAB/Simulink；Linux/Ubuntu；C++、SocketCAN 电机通信项目实践；AI 辅助代码实现与调试。
-\end{itemize}
+\resumepara{NMPC 算法复现与 120 s 闭环定车}{
+复现王伯毅等提出的 GNMS-EAMPC 框架，包括扰动观测器、受扰平衡点估计、Gauss--Newton 多重打靶及 Riccati 递推；论文简化预测模型下复现成功，但直接替换为自主 Newton--Euler 模型未能形成稳定闭环，后续 SQP-IPM 路线亦未成功。针对完整 NE-NMPC 约束优化问题改用 Active-Set 工作集法求解 QP 子问题，最终在 MATLAB--BikeSim 联合仿真中实现连续 120 s 零速定车，闭环效果优于简化模型复现基线。全程最大侧倾角 1.559°、侧倾角 RMS 1.349°、侧倾角速度 RMS 0.270°/s、纵向速度 RMS 0.04655 m/s。
+}
+
+\cvsection{\faCogs}{专业理论与算法}
+
+\resumepara{控制理论与最优控制}{
+\textbf{频域控制：} Loop Shaping 环路整形，基于开环频率响应设计补偿器，权衡增益交越频率、相位裕度、增益裕度与闭环带宽。
+\textbf{现代控制：} 掌握现代控制理论，熟悉状态空间方法、全状态反馈与状态观测器，以及 LQR、$H_2$ 最优控制、$H_\infty$ 鲁棒控制。
+\textbf{MPC/NMPC：} 熟悉有限时域最优控制问题（OCP）、滚动优化、预测模型离散化、直接多重打靶，以及动力学等式约束和状态/输入不等式约束；理解线性 MPC 到 QP、NMPC 到 NLP 的转化。
+\textbf{数值求解：} 理解 Lagrange 对偶、KKT 条件与 Farkas 引理；熟悉 SQP、Gauss--Newton Hessian 近似及 QP 子问题构造；掌握原始--对偶内点法（IPM）的障碍函数、中心路径与 KKT 牛顿系统；熟悉 Active-Set、GNMS 多重打靶及 Riccati 递推。
+}
+
+\resumepara{系统辨识与参数估计}{
+\textbf{激励信号：} Step、Sine、Chirp 扫频、Multi-sine 多正弦及 PRBS 伪随机二进制序列，了解持续激励、频带覆盖与闭环激励设计。
+\textbf{辨识模型：} ARX、ARMAX、状态空间（SS）、输出误差（OE）及 Box--Jenkins（BJ）模型。
+\textbf{参数估计：} 最小二乘（LS）、广义最小二乘（GLS）及递推最小二乘（RLS）；了解批量估计、有色噪声处理与在线参数更新。
+\textbf{模型验证：} 残差分析、输入--残差相关性检验及独立数据集验证；了解闭环辨识中的反馈相关性与参数估计偏差。
+}
+
+\cvsection{\faWrench}{开发工具与工程实践}
+
+\resumepara{建模、仿真与优化工具}{
+以 MATLAB R2024b/Simulink 为主要建模与算法开发环境，使用 BikeSim 2022 开展车辆动力学联合仿真；使用 CasADi、acados、HPIPM、qpOASES 进行 OCP/NMPC 建模及 QP 求解器配置与测试。
+}
+
+\resumepara{数值计算与工程接口}{
+具备 C++ MEX 数值内核的接口设计、集成调用、编译及性能验证经验，底层代码实现由 AI 辅助；熟悉 Linux/Ubuntu 与 SocketCAN，开展 RS10P 电机私有 CAN 2.0 扩展帧协议解析、控制指令收发及通信调试。主要使用 MATLAB 完成数学建模、控制算法设计、参数整定与仿真分析。
+}
 
 \end{document}
+
