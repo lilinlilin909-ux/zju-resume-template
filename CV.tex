@@ -76,7 +76,7 @@
 }
 
 \resumepara{LQR 转向跟踪与圆周轨迹控制}{
-在直立直线工作点对 Newton--Euler 模型进行一阶线性化，基于代数 Riccati 方程（ARE）设计 LQR 状态反馈控制器，实现转向角跟踪（转向跟踪误差：[待补充]）。在 MATLAB--BikeSim 联合仿真中完成 5--60 km/h、12 个速度节点的左右转圆周轨迹测试；最低实测质心速度为 4.983 km/h，最小已认证回转半径为 4.667 m，轨迹拟合径向 RMS 小于目标半径的 0.5\%。
+在直立直线工作点对 Newton--Euler 模型进行一阶线性化，基于代数 Riccati 方程（ARE）设计 LQR 状态反馈控制器，实现转向角跟踪（转向跟踪误差：0.013°）。在 MATLAB--BikeSim 联合仿真中完成 5--60 km/h、12 个速度节点的左右转圆周轨迹测试；最低实测质心速度为 4.983 km/h，最小已认证回转半径为 4.667 m，轨迹拟合径向 RMS 小于目标半径的 0.5\%。
 }
 
 \resumepara{NMPC 算法复现与 120 s 闭环定车}{
@@ -89,7 +89,7 @@
 \textbf{频域控制：} Loop Shaping 环路整形，基于开环频率响应设计补偿器，权衡增益交越频率、相位裕度、增益裕度与闭环带宽。
 \textbf{现代控制：} 掌握现代控制理论，熟悉状态空间方法、全状态反馈与状态观测器，以及 LQR、$H_2$ 最优控制、$H_\infty$ 鲁棒控制。
 \textbf{MPC/NMPC：} 熟悉有限时域最优控制问题（OCP）、滚动优化、预测模型离散化、直接多重打靶，以及动力学等式约束和状态/输入不等式约束；理解线性 MPC 到 QP、NMPC 到 NLP 的转化。
-\textbf{数值求解：} 理解 Lagrange 对偶、KKT 条件与 Farkas 引理；熟悉 SQP、Gauss--Newton Hessian 近似及 QP 子问题构造；掌握原始--对偶内点法（IPM）的障碍函数、中心路径与 KKT 牛顿系统；熟悉 Active-Set、GNMS 多重打靶及 Riccati 递推。
+\textbf{凸优化：} 理解 Lagrange 对偶、KKT 条件与 Farkas 引理；熟悉 SQP、Gauss--Newton Hessian 近似及 QP 子问题构造；掌握原始--对偶内点法（IPM）的障碍函数、中心路径与 KKT 牛顿系统；熟悉 Active-Set、GNMS 多重打靶及 Riccati 递推。
 }
 
 \resumepara{系统辨识与参数估计}{
