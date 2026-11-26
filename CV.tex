@@ -52,7 +52,7 @@
     {\small
       \faPhone\ [19816352936]
       \quad
-      \faEnvelopeO\ \href{mailto:your.email@example.com}{[2350483780@qq.com]}
+      \faEnvelopeO\ \href{mailto:2350483780@qq.com}{2350483780@qq.com}
       \quad
       \faGithubSquare\ \href{https://github.com/lilinlilin909-ux}{github.com/lilinlilin909-ux}
     }\\[0.20em]
@@ -65,14 +65,15 @@
 研究方向：[电动摩托车的智能驾驶]
 
 \cvsection{\faUsers}{科研与项目经历}
-\projecttitle{无人电动摩托车非线性动力学建模与运动控制研究}
+\projecttitle{无人电动摩托车非线性动力学建模与运动控制研究}{[起止年月]}
 
 \resumepara{非线性动力学建模与 Benchmark 验证}{
 基于 Whipple 四刚体模型，采用 Newton--Euler 方法建立车架及前后车轮的平动、转动方程，结合刚体运动学、轮地接触与无侧滑约束推导非线性 DAE 模型（8 个广义状态变量、10 个代数未知量）。Meijaard 线性 Benchmark 覆盖 1--10 m/s 共 10 个速度工况，40 个特征根最大绝对误差为 $3.517\times10^{-13}\ \mathrm{s}^{-1}$；Basu--Mandal 非线性 Benchmark 完成 7 组稳态圆周解及 28 个非平凡特征根对照，转向角最大误差 $2.407\times10^{-9}$°、特征根最大误差 $6.713\times10^{-10}\ \mathrm{s}^{-1}$，最大归一化约束残差 $1.975\times10^{-14}$。
 }
 
 \resumepara{数值计算高性能优化}{
-采用 C++ 固定尺寸 MEX 内核，结合公共子表达式消除（CSE）、反向自动微分（Reverse AD）、解析 Jacobian、约束方程块消元、RK4 灵敏度传播及中间量复用优化计算。统一 测试基准下，本模型 RHS、RK4、离散 Jacobian 平均计算时间分别为 10.52、19.41、73.99 μs；相较 Moore/PyDy Kane、Wang (2015)、Basu–Mandal、Xiong–Wang–Liu (2020) 模型，三项计算分别提速 1.14/1.22/3.31、2.27/2.76/3.43、3.18/5.14/4.10、1.20/1.36/2.07 倍。进一步采用紧凑工作区及六线程跨区间并行，45 个预测区间批量计算的等效Jacobian耗时由 67.99 降至 13.30 μs，吞吐提升 5.11 倍，为 NMPC 预测域内高频 Jacobian 计算提供性能基础。
+采用 C++ 固定尺寸 MEX 内核，结合公共子表达式消除（CSE）、反向自动微分（Reverse AD）、解析 Jacobian、约束方程块消元、RK4 灵敏度传播及中间量复用优化计算。统一测试基准下，本模型 RHS、RK4、离散 Jacobian 平均计算时间分别为 10.52、19.41、73.99 μs；相较 Moore/PyDy Kane、Wang (2015)、Basu–Mandal、Xiong–Wang–Liu (2020) 模型，三项计算分别提速 1.14/1.22/3.31、2.27/2.76/3.43、3.18/5.14/4.10、1.20/1.36/2.07 倍。进一步采用紧凑工作区及六线程跨区间并行，45 个预测区间批量计算的等效Jacobian耗时由 67.99 降至 13.30 μs，吞吐提升 5.11 倍，为 NMPC 预测域内高频 Jacobian 计算提供性能基础。
+}
 
 \resumepara{LQR 转向跟踪与圆周轨迹控制}{
 在直立直线工作点对 Newton--Euler 模型进行一阶线性化，基于代数 Riccati 方程（ARE）设计 LQR 状态反馈控制器，实现转向角跟踪（转向跟踪误差：[待补充]）。在 MATLAB--BikeSim 联合仿真中完成 5--60 km/h、12 个速度节点的左右转圆周轨迹测试；最低实测质心速度为 4.983 km/h，最小已认证回转半径为 4.667 m，轨迹拟合径向 RMS 小于目标半径的 0.5\%。
@@ -109,4 +110,3 @@
 }
 
 \end{document}
-
