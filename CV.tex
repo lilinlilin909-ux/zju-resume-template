@@ -1,9 +1,8 @@
 % !TeX program = xelatex
 % zju-resume-template / CV.tex
 % Keep the repository's fonts/ and fontawesome*.tex files.
-% Fill in personal information, education and personal profile.
 
-\documentclass[11pt,a4paper]{article}
+\documentclass[10pt,a4paper]{article}
 \usepackage{fontspec}
 \usepackage{xeCJK}
 \usepackage{xltxtra}
@@ -22,16 +21,16 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 \CJKsetecglue{}
-\linespread{1.07}
+\linespread{1.02}
 
 \setmainfont[Path=fonts/Main/,BoldFont=texgyretermes-bold.otf]{texgyretermes-regular.otf}
 \setCJKmainfont[Path=fonts/hansans/,BoldFont=NotoSansSC-Bold.ttf]{NotoSansSC-Regular.ttf}
 
 \definecolor{CVBlue}{RGB}{23,110,191}
-\usepackage[a4paper,left=1.28cm,right=1.28cm,top=1.05cm,bottom=1.05cm,nohead]{geometry}
+\usepackage[a4paper,left=1.15cm,right=1.15cm,top=0.75cm,bottom=0.75cm,nohead]{geometry}
 
 \titleformat{\section}{\large\bfseries\raggedright}{}{0em}{}[{\color{CVBlue}\titlerule}]
-\titlespacing*{\section}{0pt}{0.62em}{0.30em}
+\titlespacing*{\section}{0pt}{0.45em}{0.20em}
 
 \newcommand{\cvsection}[2]{%
   \section{\texorpdfstring{\makebox[\widthof{#1}][c]{\color{CVBlue}#1}\hspace{0.35em}#2}{#2}}%
@@ -40,7 +39,7 @@
   \textbf{#1}\hfill{\small\color{black!65}#2}\par\vspace{0.16em}%
 }
 \newcommand{\resumepara}[2]{%
-  \noindent\textbf{#1：}#2\par\vspace{0.26em}%
+  \noindent\textbf{#1：}#2\par\vspace{0.16em}%
 }
 
 \begin{document}
@@ -48,9 +47,9 @@
 \small
 
 \begin{center}
-    {\LARGE\bfseries [郁博威]}\\[0.22em]
+    {\LARGE\bfseries 郁博威}\\[0.22em]
     {\small
-      \faPhone\ [19816352936]
+      \faPhone\ 19816352936
       \quad
       \faEnvelopeO\ \href{mailto:2350483780@qq.com}{2350483780@qq.com}
       \quad
@@ -64,21 +63,21 @@
 \textbf{武汉理工大学}\hfill 2019.09 -- 2023.06\\[-0.05em]
 本科\quad 车辆工程
 
-\vspace{0.20em}
+\vspace{0.12em}
 
 \textbf{武汉理工大学}\hfill 2025.09 -- 至今\\[-0.05em]
 硕士研究生\quad 车辆工程\\[-0.05em]
 研究方向：电动摩托车的智能驾驶
 
 \cvsection{\faUsers}{科研与项目经历}
-\projecttitle{无人电动摩托车非线性动力学建模与运动控制研究}{[2025.12-至今]}
+\projecttitle{无人电动摩托车非线性动力学建模与运动控制研究}{2025.12 -- 至今}
 
 \resumepara{非线性动力学建模与 Benchmark 验证}{
 基于 Whipple 四刚体模型，采用 Newton--Euler 方法建立车架及前后车轮的平动、转动方程，结合刚体运动学、轮地接触与无侧滑约束推导非线性 DAE 模型（8 个广义状态变量、10 个代数未知量）。Meijaard 线性 Benchmark 覆盖 1--10 m/s 共 10 个速度工况，40 个特征根最大绝对误差为 $3.517\times10^{-13}\ \mathrm{s}^{-1}$；Basu--Mandal 非线性 Benchmark 完成 7 组稳态圆周解及 28 个非平凡特征根对照，转向角最大误差 $2.407\times10^{-9}$°、特征根最大误差 $6.713\times10^{-10}\ \mathrm{s}^{-1}$，最大归一化约束残差 $1.975\times10^{-14}$。
 }
 
 \resumepara{数值计算高性能优化}{
-采用 C++ 固定尺寸 MEX 内核，结合公共子表达式消除（CSE）、反向自动微分（Reverse AD）、解析 Jacobian、约束方程块消元、RK4 灵敏度传播及中间量复用优化计算。统一测试基准下，本模型 RHS、RK4、离散 Jacobian 平均计算时间分别为 10.52、19.41、73.99 μs；相较 Moore/PyDy Kane、Wang (2015)、Basu–Mandal、Xiong–Wang–Liu (2020) 模型，三项计算分别提速 1.14/1.22/3.31、2.27/2.76/3.43、3.18/5.14/4.10、1.20/1.36/2.07 倍。进一步采用紧凑工作区及六线程跨区间并行，45 个预测区间批量计算的等效Jacobian耗时由 67.99 降至 13.30 μs，吞吐提升 5.11 倍，为 NMPC 预测域内高频 Jacobian 计算提供性能基础。
+采用 C++ 固定尺寸 MEX 内核，结合公共子表达式消除（CSE）、反向自动微分（Reverse AD）、解析 Jacobian、约束方程块消元、RK4 灵敏度传播及中间量复用优化计算。统一测试基准下，本模型 RHS、RK4、离散 Jacobian 平均计算时间分别为 10.52、19.41、73.99 $\mu$s；相较 Moore/PyDy Kane、Wang (2015)、Basu--Mandal、Xiong--Wang--Liu (2020) 模型，三项计算分别提速 1.14/1.22/3.31、2.27/2.76/3.43、3.18/5.14/4.10、1.20/1.36/2.07 倍。进一步采用紧凑工作区及六线程跨区间并行，45 个预测区间批量计算的等效 Jacobian 耗时由 67.99 降至 13.30 $\mu$s，吞吐提升 5.11 倍，为 NMPC 预测域内高频 Jacobian 计算提供性能基础。
 }
 
 \resumepara{LQR 转向跟踪与圆周轨迹控制}{
@@ -86,25 +85,33 @@
 }
 
 \resumepara{NMPC 算法复现与 120 s 闭环定车}{
-复现清华大学博士王伯毅等提出的 GNMS-EAMPC 框架，包括扰动观测器、受扰平衡点估计、Gauss--Newton 多重打靶及 Riccati 递推；论文简化预测模型下复现成功，但直接替换为自主 Newton--Euler 模型未能形成稳定闭环，后续 SQP-IPM 路线亦未成功。针对完整 NE-NMPC 约束优化问题改用 Active-Set 工作集法求解 QP 子问题，最终在 MATLAB--BikeSim 联合仿真中实现连续 120 s 零速定车，闭环效果优于简化模型复现基线。全程最大侧倾角 1.559°、侧倾角 RMS 1.349°、侧倾角速度 RMS 0.270°/s、纵向速度 RMS 0.04655 m/s，；纵向位置最大负向偏移约 0.190 m，较 Stage37 简化模型的 0.417 m 减小约 54.5%，末态位置 −0.09968 m。
+复现清华大学博士王伯毅等提出的 GNMS-EAMPC 框架，包括扰动观测器、受扰平衡点估计、Gauss--Newton 多重打靶及 Riccati 递推；论文简化预测模型下复现成功，但直接替换为自主 Newton--Euler 模型未能形成稳定闭环，后续 SQP-IPM 路线亦未成功。针对完整 NE-NMPC 约束优化问题改用 Active-Set 工作集法求解 QP 子问题，最终在 MATLAB--BikeSim 联合仿真中实现连续 120 s 零速定车，闭环效果优于简化模型复现基线。全程最大侧倾角 1.559°、侧倾角 RMS 1.349°、侧倾角速度 RMS 0.270°/s、纵向速度 RMS 0.04655 m/s；纵向位置最大负向偏移约 0.190 m，较 Stage37 简化模型的 0.417 m 减小约 54.5\%，末态位置 $-0.09968$ m。
 }
 
 \cvsection{\faCogs}{专业理论与算法}
 
-\resumepara{控制理论与最优控制}{
-\textbf{频域控制：} Loop Shaping 环路整形，基于开环频率响应设计补偿器，权衡增益交越频率、相位裕度、增益裕度与闭环带宽。
-\textbf{现代控制：} 掌握现代控制理论，熟悉状态空间方法、全状态反馈与状态观测器，以及 LQR、$H_2$ 最优控制、$H_\infty$ 鲁棒控制。
-\textbf{MPC/NMPC：} 熟悉有限时域最优控制问题（OCP）、滚动优化、预测模型离散化、直接多重打靶，以及动力学等式约束和状态/输入不等式约束；理解线性 MPC 到 QP、NMPC 到 NLP 的转化。
-\textbf{凸优化：} 理解 Lagrange 对偶、KKT 条件与 Farkas 引理；熟悉 SQP、Gauss--Newton Hessian 近似及 QP 子问题构造；掌握原始--对偶内点法（IPM）的障碍函数、中心路径与 KKT 牛顿系统；熟悉 Active-Set、GNMS 多重打靶及 Riccati 递推。
+\resumepara{伺服控制与鲁棒控制}{
+\textbf{频域控制：} 熟悉 Loop Shaping 环路整形，基于开环频率响应设计控制器，用于电机电流环、速度环及位置环的带宽配置、机械共振规避与稳定裕度设计，协调系统响应速度、噪声放大与稳定性之间的关系。
+\textbf{最优状态反馈：} 熟悉 LQR 二次型最优控制及代数 Riccati 方程（ARE/DARE），用于多变量耦合系统的状态反馈、姿态稳定、轨迹跟踪及控制输入优化。
+\textbf{鲁棒控制：} 熟悉 H$_2$、H$_\infty$ 控制的基本原理与综合框架。H$_2$ 侧重扰动作用下的输出能量优化，H$_\infty$ 侧重模型不确定性及有界外部扰动下的最坏情况性能抑制，可用于电机负载变化、谐波减速器周期性转矩波动、机械共振及外部冲击等工况下的鲁棒控制设计。
 }
 
-\resumepara{系统辨识与参数估计}{
-\textbf{激励信号：} Step、Sine、Chirp 扫频、Multi-sine 多正弦及 PRBS 伪随机二进制序列，了解持续激励、频带覆盖与闭环激励设计。
-\textbf{辨识模型：} ARX、ARMAX、状态空间（SS）、输出误差（OE）及 Box--Jenkins（BJ）模型。
-\textbf{参数估计：} 最小二乘（LS）、广义最小二乘（GLS）及递推最小二乘（RLS）；了解批量估计、有色噪声处理与在线参数更新。
-\textbf{模型验证：} 残差分析、输入--残差相关性检验及独立数据集验证；了解闭环辨识中的反馈相关性与参数估计偏差。
+\resumepara{MPC 与凸优化数值求解}{
+\textbf{最优控制建模：} 熟悉有限时域最优控制问题（OCP）构造、滚动时域优化、直接多重打靶及预测模型离散化；能够围绕系统动力学、阶段/终端代价和状态/输入约束构建 QP/NLP 优化问题，适用于机器人关节轨迹跟踪、动态平衡、步态调节及多执行器协调控制。
+\textbf{凸优化与最优性分析：} 熟悉凸集、凸函数、凸二次规划（QP）、Lagrange 对偶、KKT 条件、互补松弛及强对偶；掌握 Farkas 引理及其线性约束不可行性证书，用于分析约束优化问题的可行性、最优性及不可行原因。
+\textbf{非线性规划（SQP）：} 熟悉 SQP 逐次二次规划，将 NLP 局部近似为连续 QP 子问题，通过迭代更新优化变量逼近非线性最优解；了解 Gauss--Newton Hessian 近似，利用残差 Jacobian 构造近似 Hessian，降低二阶导数计算开销，适用于 NMPC 在线优化。
+\textbf{二次规划求解（QP）：} 掌握原始--对偶内点法（IPM）的障碍函数、中心路径及 KKT 牛顿系统，通过原始变量与对偶变量联合迭代处理不等式约束；熟悉 Active-Set 工作集法，通过活跃约束识别与工作集更新求解 QP，可利用相邻控制周期的活跃集热启动，减少重复求解开销。
+\textbf{结构化数值求解：} 熟悉 GNMS 多重打靶、Riccati 递推及稀疏 QP 结构，利用预测时域分段、动态规划递推和块稀疏结构降低最优控制问题的计算复杂度。
 }
 
+\resumepara{电驱系统辨识与参数估计}{
+\textbf{系统激励设计：} 熟悉 Step、Sine、Chirp 扫频、Multi-sine 多正弦及 PRBS 伪随机二进制序列，用于电驱系统瞬态响应、频率响应及宽频动态特性测试，掌握持续激励、频带覆盖与闭环辨识激励设计的基本方法。
+\textbf{动态模型辨识：} 熟悉 ARX、ARMAX、状态空间（SS）、输出误差（OE）、Box--Jenkins（BJ）模型，可用于建立控制指令至关节输出的电驱执行器等效动态模型，研究功率变换器、PMSM、减速器及采样反馈链路中的动态耦合、传动时延、摩擦、柔性与谐振特性。
+\textbf{参数估计与模型验证：} 熟悉最小二乘法（LS）、广义最小二乘法（GLS）及递推最小二乘法（RLS），用于批量参数估计、白色噪声条件下的参数辨识及在线参数更新；熟悉残差分析、相关性检验与独立数据集验证，为执行器模型修正、控制器参数整定及预测模型构建提供依据。
+}
+
+
+% -------------------- Development tools and engineering practice --------------------
 \cvsection{\faWrench}{开发工具与工程实践}
 
 \resumepara{建模、仿真与优化工具}{
